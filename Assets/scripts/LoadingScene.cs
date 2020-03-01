@@ -9,7 +9,7 @@ public class LoadingScene : MonoBehaviour
 {
     GameObject player;
     GameObject mirror;
-    
+    GameObject obj;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +29,6 @@ public class LoadingScene : MonoBehaviour
                 } else
                     player.transform.position = new Vector2(mirror.transform.position.x -c.distance, mirror.transform.position.y + ydiff);
                 string velString = SceneManagerWithParameters.GetParam("velocity");
-                Debug.Log(velString);
                 player.GetComponent<Rigidbody2D>().velocity= StringToVector2(velString);
 
             }
@@ -44,8 +43,25 @@ public class LoadingScene : MonoBehaviour
                 Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
                 Vector2 v = StringToVector2(velString);
                 v = new Vector2(v.x, -v.y);
-                Debug.Log(v);
                 playerRb.velocity = v;
+            }
+            string destroyed = SceneManagerWithParameters.GetParam("Destroyed");
+            if (destroyed != "")
+            {
+                string[] sArray = destroyed.Split(',');
+                foreach (string i in sArray)
+                {
+
+                    Debug.Log(i);
+                    obj = GameObject.Find(i);
+                    Vector3 pos = StringToVector3(SceneManagerWithParameters.GetParam(i));
+                    obj.transform.position = pos;
+                    obj.GetComponent<Rigidbody2D>().simulated = true;
+                    obj.GetComponent<SpriteRenderer>().enabled = true;
+                    obj.GetComponent<BoxCollider2D>().enabled = true;
+                }
+                destroyed = "";
+                SceneManagerWithParameters.SetParam("Destroyed", destroyed);
             }
         }
         
@@ -54,8 +70,11 @@ public class LoadingScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Mirror_warp c = (Mirror_warp)mirror.gameObject.GetComponent("Mirror_warp");
-        c.warped = false;
+        if (mirror != null)
+        {
+            Mirror_warp mw = (Mirror_warp)(mirror.gameObject.GetComponent("Mirror_warp"));
+            mw.warped = false;
+        }
     }
 
     Vector2 StringToVector2(string sVector)
@@ -78,5 +97,26 @@ public class LoadingScene : MonoBehaviour
 
         return result;
     }
+    Vector3 StringToVector3(string sVector)
+    {
+        // Remove the parentheses
+        if (sVector.StartsWith("(") && sVector.EndsWith(")"))
+        {
+            sVector = sVector.Substring(1, sVector.Length - 2);
+        }
 
+        // split the items
+        string[] sArray = sVector.Split(',');
+
+        // store as a Vector3            
+        Debug.Log(sVector);
+        Vector3 result = new Vector3(
+
+            float.Parse(sArray[0]),
+            float.Parse(sArray[1]),
+            float.Parse(sArray[2])
+            );
+
+        return result;
+    }
 }

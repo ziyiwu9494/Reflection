@@ -8,6 +8,7 @@ public static class SceneManagerWithParameters
 
 
     private static Dictionary<string, string> parameters;
+    private static Dictionary<string, List<string>> parametersMulti;
 
     /// <summary>
     /// Wrapper/convenience method for normal SceneManager interface.
@@ -61,6 +62,19 @@ public static class SceneManagerWithParameters
         }
         return parameters[paramKey];
     }
+    /// <summary>
+    /// Gets an ArrayList from the parameter dictionary.
+    /// </summary>
+    /// <returns>The parameter, or empty string if it doesn't exist.</returns>
+    /// <param name="paramKey">Parameter key.</param>
+    public static List<string> GetParams(string paramKey)
+    {
+        if (parameters == null || !parameters.ContainsKey(paramKey))
+        {
+            return new List<string>();
+        }
+        return parametersMulti[paramKey];
+    }
 
     /// <summary>
     /// Sets the parameter. If the key already exists, it overwrites the existing value.
@@ -78,6 +92,24 @@ public static class SceneManagerWithParameters
             parameters.Remove(paramKey);
         }
         parameters.Add(paramKey, paramValue);
+    }
+
+    /// <summary>
+    /// Sets the parameter. If the key already exists, it overwrites the existing value.
+    /// </summary>
+    /// <param name="paramKey">Parameter key.</param>
+    /// <param name="paramValue">Parameter value as list.</param>
+    public static void SetParams(string paramKey, List<string> paramValues)
+    {
+        if (parameters == null)
+        {
+            parametersMulti = new Dictionary<string, List<string>>();
+        }
+        if (parameters.ContainsKey(paramKey))
+        {
+            parametersMulti.Remove(paramKey);
+        }
+        parametersMulti.Add(paramKey, paramValues);
     }
 
 }
