@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public static class SceneManagerWithParameters
 {
 
-
+    
     private static Dictionary<string, string> parameters;
     private static Dictionary<string, List<string>> parametersMulti;
 

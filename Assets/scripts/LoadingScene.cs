@@ -11,10 +11,18 @@ public class LoadingScene : MonoBehaviour
     GameObject player;
     GameObject mirror;
     GameObject obj;
+    public AudioSource song;
+
     Dictionary<string, string> objectDict = new Dictionary<string, string>();
     // Start is called before the first frame update
     void Start()
     {
+        string time = SceneManagerWithParameters.GetParam("SongTime");
+        if (time != "")
+        {
+            song.time = float.Parse(time);
+        }
+        song.Play();
         objectDict = new Dictionary<string, string>();
         string name = SceneManager.GetActiveScene().name;
         string active = SceneManagerWithParameters.GetParam(name + "Active");
@@ -49,6 +57,7 @@ public class LoadingScene : MonoBehaviour
         player = GameObject.Find("Player");
         if (SceneManagerWithParameters.GetParam("warped").Equals("true"))
         {
+            
             mirror = GameObject.Find(SceneManagerWithParameters.GetParam("location"));
             Mirror_warp c = (Mirror_warp)mirror.gameObject.GetComponent("Mirror_warp");
             if (c !=null)
@@ -107,6 +116,7 @@ public class LoadingScene : MonoBehaviour
             {
 
                 obj.transform.position = StringToVector3(objectDict[k]);
+                
                 obj.GetComponent<Rigidbody2D>().simulated = true;
                 obj.GetComponent<SpriteRenderer>().enabled = true;
                 obj.GetComponent<BoxCollider2D>().enabled = true;
@@ -135,6 +145,7 @@ public class LoadingScene : MonoBehaviour
             result = result.Substring(1);
         Debug.Log("result: "+result);
         SceneManagerWithParameters.SetParam(name + "Active",result);
+        SceneManagerWithParameters.SetParam("SongTime", song.time.ToString());
         SceneManagerWithParameters.Load(scene, "warped", "true");
     }
     // Update is called once per frame

@@ -186,7 +186,7 @@ PrefabInstance:
     - target: {fileID: 1056422691038324714, guid: a0685fd143dfcb64d8322dbf04b3b759,
         type: 3}
       propertyPath: m_Name
-      value: sprites updated-01_13 (4) 1 (3)
+      value: box B
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0685fd143dfcb64d8322dbf04b3b759, type: 3}
@@ -261,12 +261,17 @@ PrefabInstance:
     - target: {fileID: 8637409348830624061, guid: e2f97d1b2a63ef64280c8f088bd16d95,
         type: 3}
       propertyPath: m_Name
-      value: sprites updated-01_6 (2)
+      value: Platform
       objectReference: {fileID: 0}
     - target: {fileID: 8637409348830624061, guid: e2f97d1b2a63ef64280c8f088bd16d95,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637409348830624061, guid: e2f97d1b2a63ef64280c8f088bd16d95,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2f97d1b2a63ef64280c8f088bd16d95, type: 3}
@@ -579,7 +584,7 @@ GameObject:
   - component: {fileID: 177959066}
   - component: {fileID: 177959065}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: BGM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -596,7 +601,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d34ece9527a75b448850d350419bb641, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.294
   m_Pitch: 1
   Loop: 1
@@ -709,8 +714,8 @@ GameObject:
   - component: {fileID: 265608150}
   - component: {fileID: 265608149}
   m_Layer: 8
-  m_Name: sprites updated-01_6
-  m_TagString: Breakable
+  m_Name: Platform 1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1087,7 +1092,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6142616, y: -0.32000017, z: -10}
+  m_LocalPosition: {x: 60, y: -0.32000017, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 177959066}
@@ -1328,7 +1333,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1364215671
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f4b24d762f577b44a8c1cae94d8bac2b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -1348,7 +1353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 808752801}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.75, z: 0}
+  m_LocalPosition: {x: 60, y: -0.75, z: 0}
   m_LocalScale: {x: 9.752879, y: 11.574396, z: 1}
   m_Children:
   - {fileID: 329087244}
@@ -1650,7 +1655,7 @@ PrefabInstance:
     - target: {fileID: 1056422691038324714, guid: a0685fd143dfcb64d8322dbf04b3b759,
         type: 3}
       propertyPath: m_Name
-      value: sprites updated-01_13 (4) 1
+      value: box D
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0685fd143dfcb64d8322dbf04b3b759, type: 3}
@@ -1668,8 +1673,8 @@ GameObject:
   - component: {fileID: 1004535673}
   - component: {fileID: 1004535672}
   m_Layer: 8
-  m_Name: sprites updated-01_10
-  m_TagString: Breakable
+  m_Name: Platform 3
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1821,6 +1826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2240598aec98dd046a65ab417d8897ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  song: {fileID: 177959065}
 --- !u!4 &1032083723
 Transform:
   m_ObjectHideFlags: 0
@@ -2112,7 +2118,7 @@ PrefabInstance:
     - target: {fileID: 1056422691038324714, guid: a0685fd143dfcb64d8322dbf04b3b759,
         type: 3}
       propertyPath: m_Name
-      value: sprites updated-01_13 (4) 1 (1)
+      value: box E
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0685fd143dfcb64d8322dbf04b3b759, type: 3}
@@ -2181,7 +2187,7 @@ PrefabInstance:
     - target: {fileID: 1056422691038324714, guid: a0685fd143dfcb64d8322dbf04b3b759,
         type: 3}
       propertyPath: m_Name
-      value: sprites updated-01_13 (4) 1 (2)
+      value: box C
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0685fd143dfcb64d8322dbf04b3b759, type: 3}
@@ -2199,8 +2205,8 @@ GameObject:
   - component: {fileID: 1550305945}
   - component: {fileID: 1550305944}
   m_Layer: 8
-  m_Name: sprites updated-01_6 (1)
-  m_TagString: Breakable
+  m_Name: Platform 2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2388,7 +2394,7 @@ PrefabInstance:
     - target: {fileID: 1056422691038324714, guid: a0685fd143dfcb64d8322dbf04b3b759,
         type: 3}
       propertyPath: m_Name
-      value: sprites updated-01_13 (4) 1 (4)
+      value: box A
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0685fd143dfcb64d8322dbf04b3b759, type: 3}
@@ -2573,7 +2579,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1802978183}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.75, z: -10}
+  m_LocalPosition: {x: 60, y: -0.75, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1181707698}
@@ -2741,10 +2747,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1056422691038324705, guid: a0685fd143dfcb64d8322dbf04b3b759,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1056422691038324714, guid: a0685fd143dfcb64d8322dbf04b3b759,
         type: 3}
       propertyPath: m_Name
-      value: sprites updated-01_13 (4)
+      value: box
+      objectReference: {fileID: 0}
+    - target: {fileID: 1056422691038324717, guid: a0685fd143dfcb64d8322dbf04b3b759,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1056422691038324718, guid: a0685fd143dfcb64d8322dbf04b3b759,
+        type: 3}
+      propertyPath: m_Simulated
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0685fd143dfcb64d8322dbf04b3b759, type: 3}

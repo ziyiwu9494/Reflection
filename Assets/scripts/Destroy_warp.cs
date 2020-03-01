@@ -17,7 +17,7 @@ public class Destroy_warp : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        OnDeath();
+        //OnDeath();
     }
     public void OnDeath()
     {
