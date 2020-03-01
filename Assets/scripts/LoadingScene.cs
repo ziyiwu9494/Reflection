@@ -51,7 +51,8 @@ public class LoadingScene : MonoBehaviour
         {
             mirror = GameObject.Find(SceneManagerWithParameters.GetParam("location"));
             Mirror_warp c = (Mirror_warp)mirror.gameObject.GetComponent("Mirror_warp");
-            c.warped = true;
+            if (c !=null)
+                c.warped = true;
             if (SceneManagerWithParameters.GetParam("type").Equals("sideways"))
             {
     
@@ -142,7 +143,8 @@ public class LoadingScene : MonoBehaviour
         if (mirror != null)
         {
             Mirror_warp mw = (Mirror_warp)(mirror.gameObject.GetComponent("Mirror_warp"));
-            mw.warped = false;
+            if (mw!=null)
+                mw.warped = false;
         }
     }
 
