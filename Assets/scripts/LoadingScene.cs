@@ -1,19 +1,52 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 /// <summary>
-/// place on a scenemanager or like.  Loads in players updated position and any destroyed objects 
-
+/// place on a scenemanager or like.  Loads in players and objects as they appear 
+/// only player is programmed now though
 /// </summary>
 public class LoadingScene : MonoBehaviour
 {
     GameObject player;
     GameObject mirror;
     GameObject obj;
+    Dictionary<string, string> objectDict = new Dictionary<string, string>();
     // Start is called before the first frame update
     void Start()
     {
-        player= GameObject.Find("Player");
+        objectDict = new Dictionary<string, string>();
+        string name = SceneManager.GetActiveScene().name;
+        string active = SceneManagerWithParameters.GetParam(name + "Active");
+        Debug.Log("active: " + active);
+        if (active == ""){
+            GameObject[] destroyable = GameObject.FindGameObjectsWithTag("Breakable");
+            foreach (GameObject des in destroyable)
+            {
+                Debug.Log(des.name);
+                if (des.GetComponent<SpriteRenderer>().enabled == false)
+                {
+                    objectDict.Add(des.name, "Destroyed");
+                }
+                else
+                {
+                    objectDict.Add(des.name, des.transform.position.ToString());
+                }
+                Debug.Log("dictionary- " + des.name + ": " + objectDict[des.name]);
+            }
+        } else{
+            string[] sArray = active.Split(';');
+            foreach(string s in sArray)
+            {
+                Debug.Log(s);
+                string[] unit = s.Split(':');
+                objectDict.Add(unit[0], unit[1]);
+                Debug.Log(unit[0] + ":" + unit[1]);
+            }
+        }
+
+
+        player = GameObject.Find("Player");
         if (SceneManagerWithParameters.GetParam("warped").Equals("true"))
         {
             mirror = GameObject.Find(SceneManagerWithParameters.GetParam("location"));
@@ -51,22 +84,58 @@ public class LoadingScene : MonoBehaviour
                 string[] sArray = destroyed.Split(',');
                 foreach (string i in sArray)
                 {
-
-                    Debug.Log(i);
+                    
                     obj = GameObject.Find(i);
+                    objectDict[i]= SceneManagerWithParameters.GetParam(i);
                     Vector3 pos = StringToVector3(SceneManagerWithParameters.GetParam(i));
-                    obj.transform.position = pos;
-                    obj.GetComponent<Rigidbody2D>().simulated = true;
-                    obj.GetComponent<SpriteRenderer>().enabled = true;
-                    obj.GetComponent<BoxCollider2D>().enabled = true;
                 }
                 destroyed = "";
                 SceneManagerWithParameters.SetParam("Destroyed", destroyed);
             }
         }
-        
-    }
+        foreach(string k in objectDict.Keys)
+        {
+            obj = GameObject.Find(k);
+            if (objectDict[k].Equals("Destroyed"))
+            {
+                obj.GetComponent<Rigidbody2D>().simulated = false;
+                obj.GetComponent<SpriteRenderer>().enabled = false;
+                obj.GetComponent<BoxCollider2D>().enabled = false;
 
+            } else
+            {
+
+                obj.transform.position = StringToVector3(objectDict[k]);
+                obj.GetComponent<Rigidbody2D>().simulated = true;
+                obj.GetComponent<SpriteRenderer>().enabled = true;
+                obj.GetComponent<BoxCollider2D>().enabled = true;
+            }
+        }
+    }
+    void Destroy(string name)
+    {
+        Debug.Log(name);
+        objectDict[name] = "Destroyed";
+    }
+    void Leave(string scene)
+    {
+
+        string name = SceneManager.GetActiveScene().name;
+        string result="";
+        foreach (string k in objectDict.Keys)
+        {
+            if (objectDict[k].Equals("Destroyed"))
+                result += ";" + k + ":" + objectDict[k];
+            else
+                result += ";" + k + ":" + GameObject.Find(k).transform.position;
+
+        }
+        if (result!="")
+            result = result.Substring(1);
+        Debug.Log("result: "+result);
+        SceneManagerWithParameters.SetParam(name + "Active",result);
+        SceneManagerWithParameters.Load(scene, "warped", "true");
+    }
     // Update is called once per frame
     void Update()
     {
@@ -88,8 +157,7 @@ public class LoadingScene : MonoBehaviour
         // split the items
         string[] sArray = sVector.Split(',');
 
-        // store as a Vector3            
-        Debug.Log(sVector);
+        // store as a Vector3      
         Vector2 result = new Vector2(
 
             float.Parse(sArray[0]),
@@ -109,7 +177,6 @@ public class LoadingScene : MonoBehaviour
         string[] sArray = sVector.Split(',');
 
         // store as a Vector3            
-        Debug.Log(sVector);
         Vector3 result = new Vector3(
 
             float.Parse(sArray[0]),

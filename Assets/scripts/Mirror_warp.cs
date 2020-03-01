@@ -12,6 +12,7 @@ public class Mirror_warp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame
@@ -41,7 +42,7 @@ public class Mirror_warp : MonoBehaviour
 
                 SceneManagerWithParameters.SetParam("velocity", other.GetComponent<Rigidbody2D>().velocity.ToString());
                 SceneManagerWithParameters.SetParam("vertposition", (other.transform.position.y-transform.position.y).ToString());
-                SceneManagerWithParameters.Load(scene,"warped","true");
+
             }
             if (kind == MirrorType.updown)
             {
@@ -50,8 +51,10 @@ public class Mirror_warp : MonoBehaviour
 
                 SceneManagerWithParameters.SetParam("velocity", other.GetComponent<Rigidbody2D>().velocity.ToString());
                 SceneManagerWithParameters.SetParam("horiposition", (other.transform.position.x - transform.position.x).ToString());
-                SceneManagerWithParameters.Load(scene, "warped", "true");
+
             }
+            //GameObject.Find("MainCamera").SendMessage("StoreTime");
+            GameObject.Find("SceneManager").SendMessage("Leave", scene);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
