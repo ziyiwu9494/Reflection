@@ -11,21 +11,40 @@ public class PlayerMovement : MonoBehaviour
     bool jump = false;
     bool hit = false;
     public Animator animator;
+    private float timeBetweenAttack;
+    public float startTimeBetweenAttack;
+    public Transform attackPos;
+    public LayerMask whatIsEnemies;
+    public float attackRange;
+    public int damage; 
 
     // Update is called once per frame
     void Update()
     {
+        if (timeBetweenAttack <= 0)
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                animator.SetBool("Hit", true);
+                hit = true;
+                Collider2D [] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
+                for(int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    enemiesToDamage[i].GetComponent<Breakable>().TakeDamage(damage);
+                }
+            }
+            timeBetweenAttack = startTimeBetweenAttack;
+        }
+        else
+        {
+            timeBetweenAttack -= Time.deltaTime;
+        }
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
             animator.SetBool("Jump", true);
-        }
-        if (Input.GetButtonDown("Fire1"))
-        {
-            hit = true;
-            animator.SetBool("Hit", true);
         }
     }
 
@@ -40,5 +59,11 @@ public class PlayerMovement : MonoBehaviour
         jump = false;
         animator.SetBool("Hit", false);
     }
-    
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPos.position, attackRange);
+    }
+
 }
