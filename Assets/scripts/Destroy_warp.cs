@@ -1,20 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// records position of any destroyed objects so it can recreate them on scene switch.  Also has onmousedown function for testing, can be disabled if needed
+/// </summary>
 public class Destroy_warp : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnMouseDown()
     {
         OnDeath();

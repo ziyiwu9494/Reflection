@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// place on a scenemanager or like.  Loads in players and objects as they appear 
-/// only player is programmed now though
+/// place on a scenemanager or like.  Loads in players updated position and any destroyed objects 
+
 /// </summary>
 public class LoadingScene : MonoBehaviour
 {
