@@ -26,12 +26,11 @@ public class LoadingScene : MonoBehaviour
         objectDict = new Dictionary<string, string>();
         string name = SceneManager.GetActiveScene().name;
         string active = SceneManagerWithParameters.GetParam(name + "Active");
-        Debug.Log("active: " + active);
+
         if (active == ""){
             GameObject[] destroyable = GameObject.FindGameObjectsWithTag("Breakable");
             foreach (GameObject des in destroyable)
             {
-                Debug.Log(des.name);
                 if (des.GetComponent<SpriteRenderer>().enabled == false)
                 {
                     objectDict.Add(des.name, "Destroyed");
@@ -40,16 +39,14 @@ public class LoadingScene : MonoBehaviour
                 {
                     objectDict.Add(des.name, des.transform.position.ToString());
                 }
-                Debug.Log("dictionary- " + des.name + ": " + objectDict[des.name]);
+
             }
         } else{
             string[] sArray = active.Split(';');
             foreach(string s in sArray)
             {
-                Debug.Log(s);
                 string[] unit = s.Split(':');
                 objectDict.Add(unit[0], unit[1]);
-                Debug.Log(unit[0] + ":" + unit[1]);
             }
         }
 
@@ -125,7 +122,6 @@ public class LoadingScene : MonoBehaviour
     }
     void Destroy(string name)
     {
-        Debug.Log(name);
         objectDict[name] = "Destroyed";
     }
     void Leave(string scene)
@@ -143,7 +139,7 @@ public class LoadingScene : MonoBehaviour
         }
         if (result!="")
             result = result.Substring(1);
-        Debug.Log("result: "+result);
+
         SceneManagerWithParameters.SetParam(name + "Active",result);
         SceneManagerWithParameters.SetParam("SongTime", song.time.ToString());
         SceneManagerWithParameters.Load(scene, "warped", "true");

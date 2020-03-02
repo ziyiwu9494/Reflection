@@ -1200,7 +1200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 808752803}
-  runSpeed: 60
+  runSpeed: 100
   animator: {fileID: 808752808}
   startTimeBetweenAttack: 0
   attackPos: {fileID: 1657381198}
@@ -1966,7 +1966,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.21, y: 1.62}
+  m_Size: {x: 2.21, y: 2.38}
   m_EdgeRadius: 0
 --- !u!1 &1181707697
 GameObject:
